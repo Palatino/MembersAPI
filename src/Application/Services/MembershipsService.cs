@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services
 {
-    class MembershipsService : IMembershipsService
+    public class MembershipsService : IMembershipsService
     {
         private readonly IMembershipsDbContext _context;
         private readonly ILoggerAdapter<MembershipsService> _logger;
@@ -18,6 +18,26 @@ namespace Application.Services
             _logger = logger;
         }
 
+        public async Task<ErrorOr<MembershipDto>> GetMembership(Guid membershipId)
+        {
+            try
+            {
+                var membership = await _context.Memberships.SingleOrDefaultAsync(m => m.Id == membershipId).ConfigureAwait(false);
+                if(membership is null)
+                {
+                    _logger.LogInformation("Could not find membership with Id {membershipId}", membershipId);
+                    return Error.NotFound(description: $"Could not find membership with Id {membershipId}");
+                }
+                var result = membership.ToDto();
+                _logger.LogInformation("Memberships retrieved successfully");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving memberships");
+                return Error.Unexpected(description: "Unexpected error while retrieving memberships");
+            }
+        }
         public async Task<ErrorOr<IEnumerable<MembershipDto>>> GetMemberships(CountryDto? countryDto = null, SubscriptionTypeDto? subscriptionTypeDto = null)
         {
             try
@@ -72,7 +92,10 @@ namespace Application.Services
         {
             try
             {
-                //TODO CHECK VALIDATION
+
+                //Ids to be assigned by DB
+                membership.Id = null;
+
                 var newMembership = membership.ToDomainEntity();
                 _context.Memberships.Add(newMembership);
                 await _context.SaveChangesAsync().ConfigureAwait(false);

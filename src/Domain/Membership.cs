@@ -18,7 +18,6 @@ namespace Domain
         [MaxLength(150)]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
-        [Phone]
         [Column(TypeName = "varchar(15)")]
         public ulong? PhoneNumber { get; set; }
         [Required]
