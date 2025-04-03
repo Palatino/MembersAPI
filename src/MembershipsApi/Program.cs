@@ -1,12 +1,12 @@
 
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using Microsoft.OpenApi.Models;
 using Application;
 using Infrastructure;
-using MembershipsApi.Middleware;
 using Infrastructure.Utils;
+using MembershipsApi.Middleware;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace MembershipsApi
 {
@@ -63,7 +63,7 @@ namespace MembershipsApi
                 options.EnableAnnotations();
             });
             builder.Services.AddSwaggerGenNewtonsoftSupport();
-            
+
             //Add healthceck, must be configured in Azure accordingly
             builder.Services.AddHealthChecks();
 

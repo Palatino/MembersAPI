@@ -1,10 +1,5 @@
 ﻿using Contracts;
 using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Mapping
 {
@@ -21,7 +16,7 @@ namespace Application.Mapping
                 Email = entity.Email,
                 PhoneNumber = entity.PhoneNumber,
                 SubscriptionType = entity.SubscriptionType.ToDto(),
-                Country = entity.Country.ToDto() 
+                Country = entity.Country.ToDto()
             };
         }
     }

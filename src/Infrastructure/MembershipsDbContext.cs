@@ -1,13 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Common.Interfaces;
 using Domain;
 using Infrastructure.EntityConfigurations;
-using Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
@@ -15,7 +9,7 @@ namespace Infrastructure
     {
         public MembershipsDbContext()
         {
-            
+
         }
         public MembershipsDbContext(DbContextOptions<MembershipsDbContext> options)
         : base(options)

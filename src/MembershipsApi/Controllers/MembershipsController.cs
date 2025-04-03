@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MembershipsApi.Controllers
 {
-    public class MembershipsController : Controller
+    [ApiController]
+    [Route("api/v1/[controller]")]
+    public class MembershipsController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly ILoggerAdapter<PingController> _logger;
+        public MembershipsController(ILoggerAdapter<PingController> logger)
         {
-            return View();
+            _logger = logger;
         }
     }
 }

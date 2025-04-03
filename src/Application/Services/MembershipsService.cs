@@ -1,21 +1,14 @@
 ﻿using Application.Common.Interfaces;
 using Application.Logging;
+using Application.Mapping;
 using Contracts;
 using Contracts.Enums;
-using Domain;
 using ErrorOr;
-using Application.Mapping;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Enums;
 
 namespace Application.Services
 {
-    class MembershipsService
+    class MembershipsService : IMembershipsService
     {
         private readonly IMembershipsDbContext _context;
         private readonly ILoggerAdapter<MembershipsService> _logger;
@@ -42,7 +35,7 @@ namespace Application.Services
                 }
 
                 var matchingMemberships = await query.ToArrayAsync().ConfigureAwait(false);
-                var result =  matchingMemberships.Select(m => m.ToDto()).ToArray();
+                var result = matchingMemberships.Select(m => m.ToDto()).ToArray();
                 _logger.LogInformation("Memberships retrieved successfully");
                 return result;
             }
@@ -97,7 +90,7 @@ namespace Application.Services
             try
             {
                 var membershipInDb = await _context.Memberships.SingleOrDefaultAsync(m => m.Id == membershipId).ConfigureAwait(false);
-                if(membershipInDb is null)
+                if (membershipInDb is null)
                 {
                     _logger.LogInformation("Update of membership cancelled, " +
                     "Could not find membership with Id {membershipId}", membershipId);

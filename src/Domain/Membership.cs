@@ -1,11 +1,6 @@
 ﻿using Domain.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -14,7 +9,7 @@ namespace Domain
         [Key]
         public Guid Id { get; set; }
         [Required]
-        [MaxLength(100)] 
+        [MaxLength(100)]
         public string Name { get; set; } = string.Empty;
         [Required]
         [MaxLength(100)]
