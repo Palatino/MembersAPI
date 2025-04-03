@@ -41,10 +41,10 @@ namespace MembershipsApi
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
-
             builder.Services.AddApplication(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
             builder.Services.AddEndpointsApiExplorer();
 
             //Add swagger
@@ -75,7 +75,6 @@ namespace MembershipsApi
             app.UseHsts();
             app.UseHttpsRedirection();
             app.MapControllers();
-
             //Automatically apply migrations to DB
             //Not the best solution, better to do this using some CI/CD pipeline
             //Done this way for simplicity

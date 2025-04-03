@@ -23,8 +23,13 @@ namespace MembershipsApi.Controllers
             _membershipsService = membershipsService;
         }
 
+        [SwaggerOperation(
+            Summary = "Get all memberships",
+            Description = "Get all memberships, optional filters for country and subscription type"
+        )]
         [HttpGet]
-        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto[]), description:"Array of all matching memberships",contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         public async Task<IActionResult> GetMemberships(CountryDto? country = null, SubscriptionTypeDto? subscriptionType = null)
         {
@@ -40,9 +45,14 @@ namespace MembershipsApi.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse(500, result.FirstError.Description));
         }
 
+        [SwaggerOperation(
+            Summary = "Retrieve membership by Id",
+            Description = "Retrieve a membership by its Id"
+        )]
         [HttpGet("{id}")]
-        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto[]), contentTypes: ["application/json"])]
-        [SwaggerResponse(StatusCodes.Status404NotFound, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto), description: "Matching membership", contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status404NotFound, type: typeof(ErrorResponse), description: "When provided Id not found", contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         public async Task<IActionResult> GetMembership(Guid id)
         {
@@ -64,10 +74,19 @@ namespace MembershipsApi.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse(500, result.FirstError.Description));
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id" example="9316466f-be40-47fe-b69d-62409041980e"></param>
+        /// <returns></returns>
+        [SwaggerOperation(
+            Summary = "Delete a membership by Id",
+            Description = "Delete a membership by its Id"
+        )]
         [HttpDelete("{id}")]
-        [SwaggerResponse(StatusCodes.Status204NoContent, contentTypes: ["application/json"])]
-        [SwaggerResponse(StatusCodes.Status404NotFound, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status204NoContent, description: "On succesfull operation", contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status404NotFound, type: typeof(ErrorResponse), description: "When provided Id not found", contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         public async Task<IActionResult> DeleteMembership(Guid id)
         {
@@ -91,9 +110,14 @@ namespace MembershipsApi.Controllers
 
         }
 
+        [SwaggerOperation(
+            Summary = "Create a new a membership",
+            Description = "Create a new a membership"
+        )]
         [HttpPost]
-        [SwaggerResponse(StatusCodes.Status201Created, type: typeof(MembershipDto), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status201Created, type: typeof(MembershipDto), description: "The newly created membership", contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         public async Task<IActionResult> CreateMembership([FromBody] MembershipDto membership)
         {
             _logger.LogInformation($"Function {nameof(CreateMembership)} received a request");
@@ -110,10 +134,15 @@ namespace MembershipsApi.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse(500, result.FirstError.Description));
         }
 
+        [SwaggerOperation(
+            Summary = "Modify an existing membership",
+            Description = "Modify an existing membership"
+        )]
         [HttpPut("{id}")]
-        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto), contentTypes: ["application/json"])]
-        [SwaggerResponse(StatusCodes.Status404NotFound, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto), description: "The updated membership", contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status404NotFound, type: typeof(ErrorResponse), description: "When provided Id not found", contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         public async Task<IActionResult> UpdateMembership(Guid id, [FromBody] MembershipDto membershipDto)
         {
             _logger.LogInformation($"Function {nameof(UpdateMembership)} received a request");
