@@ -3,11 +3,23 @@
 namespace Contracts
 {
 
+    /// <summary>
+    /// Response type for any unsuccesful operation
+    /// </summary>
     public class ErrorResponse
     {
-        [SwaggerSchema("Http error code")]
+
+        /// <summary>
+        /// Http error code
+        /// </summary>
+        /// <example>404</example>
         public int ErrorCode { get; private set; }
-        [SwaggerSchema("Error description")]
+
+
+        /// <summary>
+        /// Error description
+        /// </summary>
+        /// <example>Resource not found</example>
         public string ErrorMessage { get; private set; }
 
         public ErrorResponse(int errorCode, string errorMessage)

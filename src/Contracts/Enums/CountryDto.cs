@@ -1,5 +1,8 @@
 ﻿namespace Contracts.Enums
 {
+    /// <summary>
+    /// Three character country code ISO 3166-1 alpha-3
+    /// </summary>
     public enum CountryDto
     {
         AFG, // Afghanistan

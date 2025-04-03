@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Reflection;
 
 namespace MembershipsApi
 {
@@ -50,6 +51,7 @@ namespace MembershipsApi
             //Add swagger
             builder.Services.AddSwaggerGen(options =>
             {
+
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Memberships API",
@@ -61,6 +63,15 @@ namespace MembershipsApi
                     }
                 });
                 options.EnableAnnotations();
+
+                var mainAssemblyXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var mainAssemblyXmlPath = Path.Combine(AppContext.BaseDirectory, mainAssemblyXmlFile);
+                options.IncludeXmlComments(mainAssemblyXmlPath);
+
+                // Include XML comments for the Contracts assembly
+                var contractsAssemblyXmlFile = "Contracts.xml"; 
+                var contractsAssemblyXmlPath = Path.Combine(AppContext.BaseDirectory, contractsAssemblyXmlFile);
+                options.IncludeXmlComments(contractsAssemblyXmlPath);
             });
             builder.Services.AddSwaggerGenNewtonsoftSupport();
 

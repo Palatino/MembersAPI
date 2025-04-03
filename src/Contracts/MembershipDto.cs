@@ -6,31 +6,58 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Contracts
 {
-
+    /// <summary>
+    /// Membership information
+    /// </summary>
     public class MembershipDto
     {
 
         [SwaggerSchema("The unique identifier of the membership.")]
         public Guid? Id { get; set; }
+
+        /// <summary>
+        /// Name of the membership owner
+        /// </summary>
+        /// <example>John</example>
         [Required]
         [MaxLength(100)]
-        [SwaggerSchema("Name of the membership owner")]
         public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Surname of the membership owner
+        /// </summary>
+        /// <example>Doe</example>
         [Required]
         [MaxLength(100)]
-        [SwaggerSchema("Surname of the membership owner")]
         public string Surname { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Email of the membership owner
+        /// </summary>
+        /// <example>john.doe@autodesk.com</example>
         [Required]
         [MaxLength(150)]
         [EmailAddress]
-        [SwaggerSchema("Email of the membership owner")]
         public string Email { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Phone number of the membership owner, only numeric value
+        /// </summary>
+        /// <example>447645305259</example>
         [Column(TypeName = "varchar(15)")]
-        [SwaggerSchema("Phone number of the membership owner")]
         public ulong? PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Subscription type of the membership type
+        /// </summary>
+        /// <example>Free</example>
         [Required]
-        [SwaggerSchema("Subscription type of the membership type")]
         public SubscriptionTypeDto SubscriptionType { get; set; } = SubscriptionTypeDto.Free;
+
+        /// <summary>
+        /// Membership country, three letter code ISO 3166-1 alpha-3 
+        /// </summary>
+        /// <example>AFG</example>
         [Required]
         [SwaggerSchema("Membership country")]
         public CountryDto Country { get; set; }
