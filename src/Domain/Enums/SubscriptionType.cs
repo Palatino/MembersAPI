@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Domain.Enums
 {
-    enum SubscriptionType
+    public enum SubscriptionType
     {
         Free,
         Premium,

@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Application.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace MembershipsApi.Controllers
 {
     [ApiController]
-    [Authorize()]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class PingController : ControllerBase
     {
-        private readonly ILogger<PingController> _logger;
-        public PingController(ILogger<PingController> logger)
+        private readonly ILoggerAdapter<PingController> _logger;
+        public PingController(ILoggerAdapter<PingController> logger)
         {
             _logger = logger;
         }
@@ -19,7 +19,7 @@ namespace MembershipsApi.Controllers
         public IActionResult Ping()
         {
             _logger.LogInformation("Ping requested");
-            return Ok($"Hello DEAS user at {DateTime.UtcNow}    ");
+            return Ok($"Hello there, it's {DateTime.UtcNow} right now");
         }
 
     }

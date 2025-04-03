@@ -3,6 +3,9 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Microsoft.OpenApi.Models;
+using Application;
+using Infrastructure;
+using MembershipsApi.Middleware;
 
 namespace MembershipsApi
 {
@@ -38,7 +41,9 @@ namespace MembershipsApi
             });
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-
+            builder.Services.AddApplication(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.AddEndpointsApiExplorer();
 
             //Add swagger

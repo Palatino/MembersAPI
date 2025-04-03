@@ -2,15 +2,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembershipsApi", "MembershipsApi\MembershipsApi.csproj", "{273948D2-FA8B-4149-814D-BBD7680C99C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembershipsApi", "src\MembershipsApi\MembershipsApi.csproj", "{273948D2-FA8B-4149-814D-BBD7680C99C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{892504D8-003F-4471-94C7-46595C1E8A43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{892504D8-003F-4471-94C7-46595C1E8A43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{15F108AF-6E28-4476-9044-A5B53F87358F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{15F108AF-6E28-4476-9044-A5B53F87358F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{117212F8-45DE-476F-A0B2-CAC36B65EFBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "src\Contracts\Contracts.csproj", "{117212F8-45DE-476F-A0B2-CAC36B65EFBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{19DB8CCC-5652-429C-9F8D-2C5B39940072}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{19DB8CCC-5652-429C-9F8D-2C5B39940072}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FA94ED21-F25C-478E-B145-D85B93A15F4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{273948D2-FA8B-4149-814D-BBD7680C99C3} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{892504D8-003F-4471-94C7-46595C1E8A43} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{15F108AF-6E28-4476-9044-A5B53F87358F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{117212F8-45DE-476F-A0B2-CAC36B65EFBD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{19DB8CCC-5652-429C-9F8D-2C5B39940072} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F9EE2D1D-5B82-4828-B1A5-D7C0F9463469}
