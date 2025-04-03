@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using Application;
 using Infrastructure;
 using MembershipsApi.Middleware;
+using Infrastructure.Utils;
 
 namespace MembershipsApi
 {
@@ -73,11 +74,21 @@ namespace MembershipsApi
             app.UseSwaggerUI();
             app.UseHsts();
             app.UseHttpsRedirection();
-
-
-
-
             app.MapControllers();
+
+            //Automatically apply migrations to DB
+            //Not the best solution, better to do this using some CI/CD pipeline
+            //Done this way for simplicity
+            using (var serviceScope = app.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+
+                var dbUpdater = services.GetRequiredService<DbUpdater>();
+                if (dbUpdater is not null)
+                {
+                    dbUpdater.UpdateDB();
+                }
+            }
 
             //Add endpoint for azure health check 
             app.MapHealthChecks("/healthcheck");

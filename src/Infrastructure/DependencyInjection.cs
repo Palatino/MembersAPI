@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Infrastructure.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace Infrastructure
             });
 
             services.AddScoped<IMembershipsDbContext, MembershipsDbContext>();
+            services.AddScoped<DbUpdater, DbUpdater>();
 
             return services;
         }
@@ -35,33 +37,4 @@ namespace Infrastructure
     }
 
 
-    public class MembershipsDbContextFactory : IDesignTimeDbContextFactory<MembershipsDbContext>
-    {
-        public MembershipsDbContext CreateDbContext(string[] args)
-        {
-            Console.WriteLine(Directory.GetCurrentDirectory());
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-            Console.WriteLine(filePath);
-            Console.WriteLine(File.Exists(filePath));
-            // Build configuration
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory()) // Points to the MembershipsApi directory
-                .AddJsonFile("appsettings.json") // Reads appsettings.json from the MembershipsApi project
-                .Build();
-
-            // Get connection string from configuration
-            var connectionString = configuration.GetConnectionString("MembershipsDbConnectionString");
-            Console.WriteLine("CS:   " + connectionString);
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception("The connection string 'MembershipsDbConnectionString' is not set!");
-            }
-
-            // Configure DbContextOptions
-            var optionsBuilder = new DbContextOptionsBuilder<MembershipsDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
-
-            return new MembershipsDbContext(optionsBuilder.Options);
-        }
-    }
 }

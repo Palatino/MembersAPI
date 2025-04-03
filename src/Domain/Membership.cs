@@ -29,6 +29,8 @@ namespace Domain
         [Required]
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         [Required]
+        public DateTime LastModified { get; set; } = DateTime.UtcNow;
+        [Required]
         public SubscriptionType SubscriptionType { get; set; } = SubscriptionType.Free;
         [Required]
         public Country Country { get; set; }
