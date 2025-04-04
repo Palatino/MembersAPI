@@ -2,9 +2,12 @@
 using Domain;
 using Infrastructure.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure
 {
+    [ExcludeFromCodeCoverage]
+
     public class MembershipsDbContext : DbContext, IMembershipsDbContext
     {
         public MembershipsDbContext()

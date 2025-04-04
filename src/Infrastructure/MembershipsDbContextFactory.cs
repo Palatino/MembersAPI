@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure
 {
-
+    [ExcludeFromCodeCoverage]
     public class MembershipsDbContextFactory : IDesignTimeDbContextFactory<MembershipsDbContext>
     {
         public MembershipsDbContext CreateDbContext(string[] args)

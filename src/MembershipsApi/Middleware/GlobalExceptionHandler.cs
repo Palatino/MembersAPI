@@ -2,11 +2,14 @@
 using Contracts;
 using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MembershipsApi.Middleware
 {
 
     //Global exception handler to ensure any unexpected error is captured in the logs
+    [ExcludeFromCodeCoverage]
+
     public class GlobalExceptionHandler : IExceptionHandler
     {
         private readonly ILoggerAdapter<GlobalExceptionHandler> _logger;

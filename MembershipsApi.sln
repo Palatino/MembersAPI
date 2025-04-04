@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FA94ED21-F25C-478E-B145-D85B93A15F4E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{FA94ED21-F25C-478E-B145-D85B93A15F4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembershipsApi.Tests.Unit", "tst\MembershipsApi.Tests.Unit\MembershipsApi.Tests.Unit.csproj", "{A0A42BAA-B1E9-47A8-8A7C-CDD8C8BFE2DF}"
 EndProject

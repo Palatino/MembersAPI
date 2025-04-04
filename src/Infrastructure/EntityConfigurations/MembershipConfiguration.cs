@@ -4,9 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.EntityConfigurations
 {
+    [ExcludeFromCodeCoverage]
+
     class MembershipConfiguration : IEntityTypeConfiguration<Membership>
     {
         public void Configure(EntityTypeBuilder<Membership> builder)
