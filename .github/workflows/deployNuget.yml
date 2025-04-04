@@ -1,43 +1,31 @@
-name: Build and Publish NuGet Package
+name: Publish NuGet Package
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+    paths:
+      - 'src/Contracts/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
-
-      # Setup .NET SDK
-      - name: Set up .NET Core SDK
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0'
-
-      # Restore NuGet packages
-      - name: Restore dependencies
-        run: dotnet restore
-
-      # Build the project
-      - name: Build
-        run: dotnet build --configuration Release
-
-      # Pack the NuGet package
-      - name: Pack NuGet
-        run: dotnet pack ./src/Contracts/Contracts.csproj --configuration Release --output ./nupkg
-
-      # Publish the NuGet package
-      - name: Publish to NuGet
-        uses: nuget/actions@v2
-        with:
-          api-key: ${{ secrets.NUGET_API_KEY }}
-          package-file: ./nupkg/*.nupkg
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore ./src/Contracts/Contracts.csproj
+      
+    - name: Build
+      run: dotnet build ./src/Contracts/Contracts.csproj --configuration Release --no-restore
+      
+    - name: Pack
+      run: dotnet pack ./src/Contracts/Contracts.csproj --configuration Release --no-build --output nupkgs
+      
+    - name: Publish to NuGet
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
