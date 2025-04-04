@@ -7,6 +7,8 @@
 	<PackageId>Palatino.MembersAPI.Contracts</PackageId>
 	<Version>1.0.0</Version>
 	<Authors>Pablo Alvarez</Authors>
+	<IsPackable>true</IsPackable>
+	<PackageProjectUrl>https://github.com/Palatino/MembersAPI</PackageProjectUrl>
 	<Description>API Contract DTOs</Description>
 	<PackageTags>api, contracts, dto</PackageTags>
   </PropertyGroup>
