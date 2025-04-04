@@ -11,8 +11,10 @@ namespace Contracts
     /// </summary>
     public class MembershipDto
     {
-
-        [SwaggerSchema("The unique identifier of the membership.")]
+        /// <summary>
+        /// Unique identifier of the membership
+        /// </summary>
+        /// <example>A26CC87F-6A2C-473F-8F3B-24C5BF723ADF</example>
         public Guid? Id { get; set; }
 
         /// <summary>
@@ -59,7 +61,6 @@ namespace Contracts
         /// </summary>
         /// <example>AFG</example>
         [Required]
-        [SwaggerSchema("Membership country")]
         public CountryDto Country { get; set; }
     }
 }
