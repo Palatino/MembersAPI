@@ -33,7 +33,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./tst/**/TestResults/**/*.xml
+          files: ${{ github.workspace }}/tst/**/TestResults/**/*.xml
           fail_ci_if_error: true
           verbose: true
 
