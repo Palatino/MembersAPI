@@ -3,6 +3,7 @@ using Application;
 using Infrastructure;
 using Infrastructure.Utils;
 using MembershipsApi.Middleware;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -43,6 +44,7 @@ namespace MembershipsApi
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
             builder.Services.AddApplication(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
@@ -84,6 +86,8 @@ namespace MembershipsApi
             var app = builder.Build();
 
             app.UseSwagger();
+            app.UseExceptionHandler("/Error");
+
             app.UseSwaggerUI();
             app.UseHsts();
             app.UseHttpsRedirection();
