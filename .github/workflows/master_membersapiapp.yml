@@ -66,6 +66,6 @@ jobs:
         with:
           app-name: 'membersApiApp'
           slot-name: 'Production'
-          package: .
+          package: './.net-app'
 
           
