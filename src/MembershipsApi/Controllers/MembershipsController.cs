@@ -15,9 +15,9 @@ namespace MembershipsApi.Controllers
     [Route("api/v1/[controller]")]
     public class MembershipsController : ControllerBase
     {
-        private readonly ILoggerAdapter<PingController> _logger;
+        private readonly ILoggerAdapter<MembershipsController> _logger;
         private readonly IMembershipsService _membershipsService;
-        public MembershipsController(ILoggerAdapter<PingController> logger, IMembershipsService membershipsService)
+        public MembershipsController(ILoggerAdapter<MembershipsController> logger, IMembershipsService membershipsService)
         {
             _logger = logger;
             _membershipsService = membershipsService;
@@ -159,11 +159,6 @@ namespace MembershipsApi.Controllers
             {
                 _logger.LogInformation($"Function {nameof(UpdateMembership)} returned 404 code");
                 return new NotFoundObjectResult(new ErrorResponse(404, error.Description));
-            }
-            if (error.Type == ErrorType.Validation)
-            {
-                _logger.LogInformation($"Function {nameof(UpdateMembership)} returned 400 code");
-                return new BadRequestObjectResult(new ErrorResponse(400, error.Description));
             }
             _logger.LogInformation($"Function {nameof(UpdateMembership)} returned 500 code");
             return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse(500, error.Description));
