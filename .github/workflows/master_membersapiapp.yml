@@ -29,13 +29,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./output
+        run: dotnet publish ./src/MembershipsApi -c Release -o ./output
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.AZURE_APP_DEPLOYMENT_PATH}}
+          path: ./output
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,6 +66,6 @@ jobs:
         with:
           app-name: 'membersApiApp'
           slot-name: 'Production'
-          package: "${{ env.AZURE_APP_DEPLOYMENT_PATH }}"
+          package: .
 
           
