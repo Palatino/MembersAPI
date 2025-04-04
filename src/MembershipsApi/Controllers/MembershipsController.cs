@@ -35,7 +35,7 @@ namespace MembershipsApi.Controllers
         {
             _logger.LogInformation($"Function {nameof(GetMemberships)} received a request");
 
-            var result = await _membershipsService.GetMemberships(country, subscriptionType);
+            var result = await _membershipsService.GetMembershipsAsync(country, subscriptionType);
             if (!result.IsError)
             {
                 _logger.LogInformation($"Function {nameof(GetMemberships)} returned 200 code");
@@ -58,7 +58,7 @@ namespace MembershipsApi.Controllers
         {
             _logger.LogInformation($"Function {nameof(GetMembership)} received a request");
 
-            var result = await _membershipsService.GetMembership(id);
+            var result = await _membershipsService.GetMembershipByIdAsync(id);
             if (!result.IsError)
             {
                 _logger.LogInformation($"Function {nameof(GetMembership)} returned 200 code");
@@ -92,7 +92,7 @@ namespace MembershipsApi.Controllers
         {
             _logger.LogInformation($"Function {nameof(DeleteMembership)} received a request");
 
-            var result = await _membershipsService.DeleteMembershipById(id);
+            var result = await _membershipsService.DeleteMembershipByIdAsync(id);
 
             if (!result.IsError)
             {
@@ -122,7 +122,7 @@ namespace MembershipsApi.Controllers
         {
             _logger.LogInformation($"Function {nameof(CreateMembership)} received a request");
 
-            var result = await _membershipsService.CreateNewMembership(membership);
+            var result = await _membershipsService.CreateNewMembershipAsync(membership);
 
             if (!result.IsError)
             {
@@ -147,7 +147,7 @@ namespace MembershipsApi.Controllers
         {
             _logger.LogInformation($"Function {nameof(UpdateMembership)} received a request");
 
-            var result = await _membershipsService.UpdateMembership(id, membershipDto);
+            var result = await _membershipsService.UpdateMembershipAsync(id, membershipDto);
 
             if (!result.IsError)
             {
