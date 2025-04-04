@@ -5,7 +5,7 @@
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<OutputPath>$(OutDir)</OutputPath>
 	<PackageId>Palatino.MembersAPI.Contracts</PackageId>
-	<Version>1.0.0</Version>
+	<Version>1.0.1</Version>
 	<Authors>Pablo Alvarez</Authors>
 	<IsPackable>true</IsPackable>
 	<PackageProjectUrl>https://github.com/Palatino/MembersAPI</PackageProjectUrl>
