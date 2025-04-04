@@ -3,9 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<RepositoryUrl>https://github.com/Palatino/MembersAPI</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	<OutputPath>$(OutDir)</OutputPath>
 	<PackageId>Palatino.MembersAPI.Contracts</PackageId>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
 	<Authors>Pablo Alvarez</Authors>
 	<IsPackable>true</IsPackable>
 	<PackageProjectUrl>https://github.com/Palatino/MembersAPI</PackageProjectUrl>
