@@ -18,7 +18,7 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public async Task<ErrorOr<MembershipDto>> GetMembership(Guid membershipId)
+        public async Task<ErrorOr<MembershipDto>> GetMembershipByIdAsync(Guid membershipId)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Application.Services
                 return Error.Unexpected(description: "Unexpected error while retrieving memberships");
             }
         }
-        public async Task<ErrorOr<IEnumerable<MembershipDto>>> GetMemberships(CountryDto? countryDto = null, SubscriptionTypeDto? subscriptionTypeDto = null)
+        public async Task<ErrorOr<IEnumerable<MembershipDto>>> GetMembershipsAsync(CountryDto? countryDto = null, SubscriptionTypeDto? subscriptionTypeDto = null)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Application.Services
                 return Error.Unexpected(description: "Unexpected error while retrieving memberships");
             }
         }
-        public async Task<ErrorOr<Deleted>> DeleteMembershipById(Guid membershipId)
+        public async Task<ErrorOr<Deleted>> DeleteMembershipByIdAsync(Guid membershipId)
         {
             try
             {
@@ -84,11 +84,11 @@ namespace Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting membership");
+                _logger.LogError(ex, "Error deleting membership {membershipId}", membershipId);
                 return Error.Unexpected(description: "Unexpected error while deleting membership");
             }
         }
-        public async Task<ErrorOr<MembershipDto>> CreateNewMembership(MembershipDto membership)
+        public async Task<ErrorOr<MembershipDto>> CreateNewMembershipAsync(MembershipDto membership)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace Application.Services
                 return Error.Unexpected(description: "Unexpected error while creating membership");
             }
         }
-        public async Task<ErrorOr<MembershipDto>> UpdateMembership(Guid membershipId, MembershipDto membershipDto)
+        public async Task<ErrorOr<MembershipDto>> UpdateMembershipAsync(Guid membershipId, MembershipDto membershipDto)
         {
             try
             {

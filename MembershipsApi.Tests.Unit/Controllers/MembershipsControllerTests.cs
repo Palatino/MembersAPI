@@ -49,7 +49,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
                     PhoneNumber = 73759034
                 }
                 ];
-            _membershipsService.GetMemberships().Returns(expectedMemberships);
+            _membershipsService.GetMembershipsAsync().Returns(expectedMemberships);
 
             //Act
             var actionResult = await _sut.GetMemberships();
@@ -67,7 +67,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
         {
             //Arrange
             var errorDescription = "Some error";
-            _membershipsService.GetMemberships().Returns(Error.Unexpected(description: errorDescription));
+            _membershipsService.GetMembershipsAsync().Returns(Error.Unexpected(description: errorDescription));
 
             //Act
             var actionResult = await _sut.GetMemberships();
@@ -98,7 +98,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
                     Email = "juan.perez@gmail.com",
                     PhoneNumber = 73759034
                 };
-            _membershipsService.GetMembership(Arg.Is(expectedMembership.Id.Value)).Returns(expectedMembership);
+            _membershipsService.GetMembershipByIdAsync(Arg.Is(expectedMembership.Id.Value)).Returns(expectedMembership);
 
             //Act
             var actionResult = await _sut.GetMembership(expectedMembership.Id.Value);
@@ -117,7 +117,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
             //Arrange
 
             var error = Error.NotFound(description: "Not found description");
-            _membershipsService.GetMembership(Arg.Any<Guid>()).Returns(error);
+            _membershipsService.GetMembershipByIdAsync(Arg.Any<Guid>()).Returns(error);
 
             //Act
 
@@ -137,7 +137,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
         {
             //Arrange
             var errorDescription = "Some error";
-            _membershipsService.GetMembership(Arg.Any<Guid>()).Returns(Error.Unexpected(description: errorDescription));
+            _membershipsService.GetMembershipByIdAsync(Arg.Any<Guid>()).Returns(Error.Unexpected(description: errorDescription));
 
             //Act
             var actionResult = await _sut.GetMembership(Guid.NewGuid());
@@ -158,7 +158,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
         {
             //Arrange
             var idToDelete = Guid.NewGuid();
-            _membershipsService.DeleteMembershipById(Arg.Is(idToDelete)).Returns(Result.Deleted);
+            _membershipsService.DeleteMembershipByIdAsync(Arg.Is(idToDelete)).Returns(Result.Deleted);
 
             //Act
             var actionResult = await _sut.DeleteMembership(idToDelete);
@@ -175,7 +175,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
             //Arrange
             var idToDelete = Guid.NewGuid();
             var error = Error.NotFound(description: "Not found error description");
-            _membershipsService.DeleteMembershipById(Arg.Is(idToDelete)).Returns(error);
+            _membershipsService.DeleteMembershipByIdAsync(Arg.Is(idToDelete)).Returns(error);
 
             //Act
             var actionResult = await _sut.DeleteMembership(idToDelete);
@@ -195,7 +195,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
             //Arrange
             var errorDescription = "Some error";
             var idToDelete = Guid.NewGuid();
-            _membershipsService.DeleteMembershipById(Arg.Is(idToDelete))
+            _membershipsService.DeleteMembershipByIdAsync(Arg.Is(idToDelete))
                 .Returns(Error.Unexpected(description: errorDescription));
 
             //Act
@@ -226,7 +226,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
                 Email = "juan.perez@gmail.com",
                 PhoneNumber = 73759034
             };
-            _membershipsService.CreateNewMembership(Arg.Is(membership)).Returns(membership);
+            _membershipsService.CreateNewMembershipAsync(Arg.Is(membership)).Returns(membership);
 
             //Act
             var actionResult = await _sut.CreateMembership(membership);
@@ -243,7 +243,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
         {
             //Arrange
             var errorDescription = "Some error";
-            _membershipsService.CreateNewMembership(Arg.Any<MembershipDto>())
+            _membershipsService.CreateNewMembershipAsync(Arg.Any<MembershipDto>())
                 .Returns(Error.Unexpected(description: errorDescription));
             var membership = new MembershipDto()
             {
@@ -284,7 +284,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
                 Email = "juan.perez@gmail.com",
                 PhoneNumber = 73759034
             };
-            _membershipsService.UpdateMembership(Arg.Is(idToUpdate), Arg.Is(membership)).Returns(membership);
+            _membershipsService.UpdateMembershipAsync(Arg.Is(idToUpdate), Arg.Is(membership)).Returns(membership);
 
             //Act
             var actionResult = await _sut.UpdateMembership(idToUpdate, membership);
@@ -313,7 +313,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
                 PhoneNumber = 73759034
             };
             var error = Error.NotFound(description: "Error description");
-            _membershipsService.UpdateMembership(Arg.Is(idToUpdate), Arg.Is(membership)).Returns(error);
+            _membershipsService.UpdateMembershipAsync(Arg.Is(idToUpdate), Arg.Is(membership)).Returns(error);
 
             //Act
             var actionResult = await _sut.UpdateMembership(idToUpdate, membership);
@@ -343,7 +343,7 @@ namespace MembershipsApi.Tests.Unit.Controllers
                 PhoneNumber = 73759034
             };
             var error = Error.Unexpected(description: "Error description");
-            _membershipsService.UpdateMembership(Arg.Is(idToUpdate), Arg.Is(membership)).Returns(error);
+            _membershipsService.UpdateMembershipAsync(Arg.Is(idToUpdate), Arg.Is(membership)).Returns(error);
 
             //Act
             var actionResult = await _sut.UpdateMembership(idToUpdate, membership);
