@@ -3,11 +3,8 @@ using Application.Logging;
 using Contracts;
 using Contracts.Enums;
 using ErrorOr;
-using Microsoft.ApplicationInsights.Extensibility.Implementation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MembershipsApi.Controllers
 {
@@ -28,7 +25,7 @@ namespace MembershipsApi.Controllers
             Description = "Get all memberships, optional filters for country and subscription type"
         )]
         [HttpGet]
-        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto[]), description:"Array of all matching memberships",contentTypes: ["application/json"])]
+        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(MembershipDto[]), description: "Array of all matching memberships", contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status400BadRequest, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, type: typeof(ErrorResponse), contentTypes: ["application/json"])]
         public async Task<IActionResult> GetMemberships(CountryDto? country = null, SubscriptionTypeDto? subscriptionType = null)

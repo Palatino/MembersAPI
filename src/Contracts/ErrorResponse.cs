@@ -1,6 +1,4 @@
-﻿using Swashbuckle.AspNetCore.Annotations;
-
-namespace Contracts
+﻿namespace Contracts
 {
 
     /// <summary>

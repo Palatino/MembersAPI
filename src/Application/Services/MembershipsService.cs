@@ -23,7 +23,7 @@ namespace Application.Services
             try
             {
                 var membership = await _context.Memberships.SingleOrDefaultAsync(m => m.Id == membershipId).ConfigureAwait(false);
-                if(membership is null)
+                if (membership is null)
                 {
                     _logger.LogInformation("Could not find membership with Id {membershipId}", membershipId);
                     return Error.NotFound(description: $"Could not find membership with Id {membershipId}");
