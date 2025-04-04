@@ -8,7 +8,12 @@ on:
     branches:
       - master
   workflow_dispatch:
-
+  
+env:
+  DOTNET_VERSION: "8.0.x"
+  AZURE_APP_WORKING_DIR: "./src/MembershipsApi/"
+  AZURE_APP_DEPLOYMENT_PATH: "./src/MembershipsApi/output"
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,19 +26,16 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
-
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ./output
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.AZURE_APP_DEPLOYMENT_PATH}}
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,5 +66,6 @@ jobs:
         with:
           app-name: 'membersApiApp'
           slot-name: 'Production'
-          package: .
+          package: "${{ env.AZURE_APP_DEPLOYMENT_PATH }}"
+
           
