@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FA94ED21-F25C-478E-B145-D85B93A15F4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembershipsApi.Tests.Unit", "MembershipsApi.Tests.Unit\MembershipsApi.Tests.Unit.csproj", "{A0A42BAA-B1E9-47A8-8A7C-CDD8C8BFE2DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembershipsApi.Tests.Unit", "tst\MembershipsApi.Tests.Unit\MembershipsApi.Tests.Unit.csproj", "{A0A42BAA-B1E9-47A8-8A7C-CDD8C8BFE2DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests.Unit", "Application.Tests.Unit\Application.Tests.Unit.csproj", "{B42A4E83-2C1F-4A86-AAD5-397276F5B1E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests.Unit", "tst\Application.Tests.Unit\Application.Tests.Unit.csproj", "{B42A4E83-2C1F-4A86-AAD5-397276F5B1E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
