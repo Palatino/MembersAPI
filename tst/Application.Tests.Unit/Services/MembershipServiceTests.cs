@@ -8,12 +8,7 @@ using FluentAssertions;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Tests.Unit.Services
 {
@@ -201,8 +196,8 @@ namespace Application.Tests.Unit.Services
             //Assert
             result.IsError.Should().BeFalse();
             result.Value.Should().BeEquivalentTo(memberships, options => options
-            .Excluding(m=>m.DateCreated)
-            .Excluding(m=>m.LastModified)
+            .Excluding(m => m.DateCreated)
+            .Excluding(m => m.LastModified)
             );
             _logger.Received(1).LogInformation(Arg.Any<string>());
 
@@ -362,8 +357,8 @@ namespace Application.Tests.Unit.Services
             DateTime dateCreated;
 
             DateTime.TryParseExact(
-                "03/04/2025", 
-                "dd/MM/yyyy", 
+                "03/04/2025",
+                "dd/MM/yyyy",
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None,
                 out dateCreated);
@@ -398,11 +393,11 @@ namespace Application.Tests.Unit.Services
 
             //Assert
             result.IsError.Should().BeFalse();
-            result.Value.Should().BeEquivalentTo(updateRequest, options => options.Excluding(m=>m.Id));
+            result.Value.Should().BeEquivalentTo(updateRequest, options => options.Excluding(m => m.Id));
             result.Value.Id.Should().Be(membership.Id);
 
             //Check dates in DB
-            var updatedMembershipInDb = await _context.Memberships.SingleOrDefaultAsync(m => m.Id==membership.Id);
+            var updatedMembershipInDb = await _context.Memberships.SingleOrDefaultAsync(m => m.Id == membership.Id);
             updatedMembershipInDb.Should().NotBeNull();
             updatedMembershipInDb.DateCreated.Should().Be(dateCreated);
             updatedMembershipInDb.LastModified.Should().BeAfter(dateCreated);

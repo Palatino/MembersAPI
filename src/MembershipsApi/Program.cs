@@ -71,7 +71,7 @@ namespace MembershipsApi
                 options.IncludeXmlComments(mainAssemblyXmlPath);
 
                 // Include XML comments for the Contracts assembly
-                var contractsAssemblyXmlFile = "Contracts.xml"; 
+                var contractsAssemblyXmlFile = "Contracts.xml";
                 var contractsAssemblyXmlPath = Path.Combine(AppContext.BaseDirectory, contractsAssemblyXmlFile);
                 options.IncludeXmlComments(contractsAssemblyXmlPath);
             });

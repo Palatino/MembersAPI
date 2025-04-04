@@ -1,5 +1,4 @@
 ﻿using Contracts.Enums;
-using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

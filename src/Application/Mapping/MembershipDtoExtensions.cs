@@ -9,7 +9,7 @@ namespace Application.Mapping
         {
             return new Membership
             {
-                Id = dto.Id.HasValue?dto.Id.Value:Guid.NewGuid(),
+                Id = dto.Id.HasValue ? dto.Id.Value : Guid.NewGuid(),
                 Name = dto.Name,
                 Surname = dto.Surname,
                 Email = dto.Email,
