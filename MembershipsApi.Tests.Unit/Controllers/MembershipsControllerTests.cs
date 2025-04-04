@@ -359,13 +359,6 @@ namespace MembershipsApi.Tests.Unit.Controllers
 
         }
 
-        [Fact]
-        public async Task ThisTestFails()
-        {
-            //To test pipeline
-            int value = 3;
-            value.Should().Be(5);
 
-        }
     }
 }
