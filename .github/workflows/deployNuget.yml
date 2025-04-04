@@ -1,0 +1,43 @@
+name: Build and Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Setup .NET SDK
+      - name: Set up .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'
+
+      # Restore NuGet packages
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Build the project
+      - name: Build
+        run: dotnet build --configuration Release
+
+      # Pack the NuGet package
+      - name: Pack NuGet
+        run: dotnet pack ./src/Contracts/Contracts.csproj --configuration Release --output ./nupkg
+
+      # Publish the NuGet package
+      - name: Publish to NuGet
+        uses: nuget/actions@v2
+        with:
+          api-key: ${{ secrets.NUGET_API_KEY }}
+          package-file: ./nupkg/*.nupkg
