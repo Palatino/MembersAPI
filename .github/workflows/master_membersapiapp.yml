@@ -32,7 +32,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./TestResults/**/*.xml
+          files: ./tst/**/TestResults/**/*.xml
           fail_ci_if_error: true
           verbose: true
 
