@@ -29,6 +29,11 @@ jobs:
       - name: Run tests with coverage
         run: dotnet test --collect:"XPlat Code Coverage"
 
+      - name: List generated coverage files
+        run: |
+          echo "Listing all coverage files"
+          find ${{ github.workspace }}/tst -name "coverage.cobertura.xml"
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
