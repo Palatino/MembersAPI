@@ -2,7 +2,7 @@
 {
 
     /// <summary>
-    /// Response type for any unsuccesful operation
+    /// Response type for any unsuccessful operation
     /// </summary>
     public class ErrorResponse
     {

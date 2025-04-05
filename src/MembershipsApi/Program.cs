@@ -1,9 +1,10 @@
 
 using Application;
+using Contracts;
 using Infrastructure;
 using Infrastructure.Utils;
 using MembershipsApi.Middleware;
-using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -50,6 +51,24 @@ namespace MembershipsApi
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
+
+            //Map bad request error response to custom ErrorResponse class for consistency
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = context =>
+                {
+                    var errors = context.ModelState
+                        .Where(e => e.Value.Errors.Count > 0)
+                        .SelectMany(x => x.Value.Errors)
+                        .Select(x => x.ErrorMessage)
+                        .ToList();
+
+                    var errorMessage = string.Join(", ", errors);
+                    var response = new ErrorResponse(400, errorMessage);
+                    return new BadRequestObjectResult(response);
+                };
+            });
+
             builder.Services.AddEndpointsApiExplorer();
 
             //Add swagger
@@ -63,7 +82,7 @@ namespace MembershipsApi
                     Contact = new OpenApiContact
                     {
                         Name = "Pablo Alvarez",
-                        Email = "pablo.alvarez@arcadis.com"
+                        Email = "p.alvarez.rio@gmail.com"
                     }
                 });
                 options.EnableAnnotations();
@@ -79,7 +98,7 @@ namespace MembershipsApi
             });
             builder.Services.AddSwaggerGenNewtonsoftSupport();
 
-            //Add healthceck, must be configured in Azure accordingly
+            //Add HealthCheck, must be configured in Azure accordingly
             builder.Services.AddHealthChecks();
 
 
@@ -92,6 +111,7 @@ namespace MembershipsApi
             app.UseHsts();
             app.UseHttpsRedirection();
             app.MapControllers();
+
             //Automatically apply migrations to DB
             //Not the best solution, better to do this using some CI/CD pipeline
             //Done this way for simplicity
