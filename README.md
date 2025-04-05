@@ -9,7 +9,6 @@ It contains five endpoints to manage memberships:
 
 ![image](https://github.com/user-attachments/assets/5d17089a-659d-46b7-b3f5-fca1f80bedcc)
 
-The full swagger documentation can be explored here: https://membersapiapp-f4hyhffagxcbfrde.spaincentral-01.azurewebsites.net/swagger/index.html
 
 ## Code Structure
 The solution is broken in five different projects:
