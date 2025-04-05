@@ -23,8 +23,8 @@ namespace MembershipsApi.Controllers
         /// <summary>
         /// Get all memberships
         /// </summary>
-        /// <param name="country" example="ARG">Optional country filter</param>
-        /// <param name="subscriptionType" example="Free">Optional subscription type filter</param>
+        /// <param name="country">Optional country filter</param>
+        /// <param name="subscriptionType">Optional subscription type filter</param>
         /// <returns></returns>
         [SwaggerOperation(
             Description = "Get all memberships, optional filters for country and subscription type"
