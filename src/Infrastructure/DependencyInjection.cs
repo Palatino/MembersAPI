@@ -22,7 +22,14 @@ namespace Infrastructure
             }
             services.AddDbContext<MembershipsDbContext>(options =>
             {
-                options.UseSqlServer(dbConnectionString);
+                options.UseSqlServer(dbConnectionString, sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                });
+
             });
 
             services.AddScoped<IMembershipsDbContext, MembershipsDbContext>();
